@@ -1,3 +1,4 @@
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -6,11 +7,10 @@
 namespace gm {
 
 
-    void Game::delay() {
-        sf::sleep(sf::milliseconds(10));
-    }
 
-    Game::Game() {
+
+    Game::Game(unsigned int count) {
+        win_count = count;
         startGame();
     }
 
@@ -19,43 +19,61 @@ namespace gm {
     }
 
     void Game::startGame() {
-        sf::RenderWindow window(sf::VideoMode(640, 480), "Project for BFU");
-        sf::CircleShape shape;
+        sf::RenderWindow window(sf::VideoMode(x_size, y_size), "Project for BFU");
+        sf::RectangleShape rectanglePlayer1 = generateRectangle();
+        sf::RectangleShape rectanglePlayer2 = generateRectangle();
+        sf::CircleShape ball = generateBall();
 
-        shape.setRadius(radius);
-        shape.setPosition(320.f, 240.f);
-        shape.setPosition(111.f, 222.f);
-        shape.setFillColor(sf::Color::White);
+
+
+
 
         while (window.isOpen())
         {
 
             sf::Event event;
-            shape.setPosition(xOfShape, yOfShape);
-            myTread.launch();
-            xOfShape+=1; yOfShape+=1;
+            rectanglePlayer1.setPosition(xPositionOfRectangle1, yPositionOfRectangle1);
+            rectanglePlayer2.setPosition(xPositionOfRectangle2, yPositionOfRectangle2);
+            ball.setPosition(xPositionOfBall, yPositionOfBall);
+//            xOfRectangle+=1; yOfRectangle+=1;
             while (window.pollEvent(event))
-            {
                 if (event.type == sf::Event::Closed)
                     window.close();
 
-                window.clear();
-                window.draw(shape);
-                window.display();
-            }
+            window.clear();
+            window.draw(rectanglePlayer1);
+            window.draw(rectanglePlayer2);
+            window.draw(ball);
+            window.display();
     }}
 
 
 
+    unsigned int Game::getCount() {
+        return win_count;
+    }
 
 
+    void Game::changePosition(float x, float y) {
+        xOfRectangle  += x;
+        yOfRectangle += y;
+    }
 
+    sf::RectangleShape Game::generateRectangle() {
+        sf::RectangleShape shape;
+        shape.setSize(sf::Vector2f(xOfRectangle, yOfRectangle));
+        shape.setFillColor(sf::Color::White);
+        return shape;
+    }
+
+    sf::CircleShape Game::generateBall() {
+        sf::CircleShape shape;
+        shape.setRadius(radiusOfBall);
+        shape.setFillColor(sf::Color::Red);
+        return shape;
+    }
 
     Game::~Game() {}
-
-
-
-
 
 
 } // gm

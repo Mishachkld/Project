@@ -4,5 +4,25 @@
 
 #include "Settings.hpp"
 
+
 namespace set {
+
+    Settings::Settings(unsigned int x, unsigned int y, unsigned int count) {
+        win_count = count;
+        x_size = x;
+        y_size = y;
+    }
+
+
+    unsigned int Settings::getCount() {
+        return win_count;
+    }
+
+
+    Settings::~Settings() {
+
+    }
+
+
+
 } // set

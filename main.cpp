@@ -1,8 +1,11 @@
+#include <iostream>
 #include "Game/Game.hpp"
-#include "Settings/Settings.hpp"
-#include "Figure/Figure.hpp"
+
 int main(){
-    gm::Game newGame;
+    unsigned int winCount = 3;
+//    std::cout << "Write win count > 0: ";
+//    std::cin  >> winCount;
+    gm::Game newGame(winCount);
 
     return 0;
 }
