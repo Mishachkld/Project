@@ -3,7 +3,7 @@
 
 #include <vector>
 
-namespace set {
+namespace gm {
 
     class Settings {
     public:

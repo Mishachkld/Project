@@ -5,7 +5,7 @@
 #include "Settings.hpp"
 
 
-namespace set {
+namespace gm {
 
     Settings::Settings(unsigned int x, unsigned int y, unsigned int count) {
         win_count = count;
@@ -25,4 +25,4 @@ namespace set {
 
 
 
-} // set
+} // gm

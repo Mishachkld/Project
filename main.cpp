@@ -1,11 +1,9 @@
-#include <iostream>
+
 #include "Game/Game.hpp"
+#define WIN_COUNT 3
 
 int main(){
-    unsigned int winCount = 3;
-//    std::cout << "Write win count > 0: ";
-//    std::cin  >> winCount;
-    gm::Game newGame(winCount);
+    gm::Game newGame(WIN_COUNT);
 
     return 0;
 }

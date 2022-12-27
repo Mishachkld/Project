@@ -1,6 +1,7 @@
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#ifndef PROJECT_GAME_HPP
-#define PROJECT_GAME_HPP
+#include <SFML/System.hpp>
+#pragma once
 namespace gm {
     class Game {
     public:
@@ -11,18 +12,22 @@ namespace gm {
         sf::CircleShape generateBall();
         ~Game();
 
+
     private:
+        ///*Window*///
+
+
         ///*Shapes move*///
-        float xPositionOfRectangle1 = 48.f;
+        float xPositionOfRectangle1 = 24.f;
         float yPositionOfRectangle1 = 0.f;
-        float xPositionOfRectangle2 = 752.f;
+        float xPositionOfRectangle2 = 776.f;
         float yPositionOfRectangle2 = 0.f;
         float xPositionOfBall = 400.f;
         float yPositionOfBall = 200.f;
 
         ///*Size of shapes*///
-        float xOfRectangle = 16.f;
-        float yOfRectangle = 100.f;
+        float xSizeOfRectangle = 16.f;
+        float ySizeOfRectangle = 100.f;
         float radiusOfBall = 8.f;
 
         ///*Settings*///
@@ -37,8 +42,8 @@ namespace gm {
         ///*Functions*///
         void getSettings();
         void startGame();
+        void update();
+        void render();
     };
 
 }
-
-#endif //PROJECT_GAME_HPP

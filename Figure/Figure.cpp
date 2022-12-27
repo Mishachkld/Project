@@ -1,5 +1,5 @@
 #include "Figure.hpp"
-namespace fg{
+namespace gm{
 
 
 
