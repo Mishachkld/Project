@@ -9,10 +9,6 @@
 #pragma once
 namespace gm {
     class Game {
-        struct XY{
-            float x;
-            float y;
-        };
     public:
         Game(unsigned int count);
         unsigned int getCount();
@@ -29,11 +25,12 @@ namespace gm {
         float yPositionOfRectangle2 = 0.f;
         float xPositionOfBall = 400.f;
         float yPositionOfBall = 200.f;
+//        float countSize = y_size / 2 - ySizeOfRectangle / 2;
 
         ///*Size of shapes*///
         float xSizeOfRectangle = 16.f;
         float ySizeOfRectangle = 100.f;
-        ///*Settings*///
+        ///*PublicVar*///
         const unsigned int x_size = 800;
         const unsigned int y_size = 400;
 

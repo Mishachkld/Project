@@ -17,13 +17,13 @@ namespace gm {
     }
 
     void Rectangle::moveRectangle() {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and (numberPlayer == 1) ||
-            (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) and (numberPlayer == 2)) {
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) and (numberPlayer == 1) ||
+            (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) and (numberPlayer == 2)) and (yPosition > 0)){
             yPosition -= speed;
             setPosition(xPosition, yPosition);
         }
         if (((sf::Keyboard::isKeyPressed(sf::Keyboard::S) and (numberPlayer == 1) ||
-            (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and (numberPlayer == 2)))) and ()){
+            (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and (numberPlayer == 2)))) and (sizeOfWindow > (yPosition + ySizeOfRectangle))){
             yPosition += speed;
             setPosition(xPosition, yPosition);
         }

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Project main.cpp
         Figure/Rectnagle/Rectangle.cpp
-        Figure/Rectnagle/Rectangle.hpp Settings/Settings.cpp Settings/Settings.hpp Game/Game.cpp Game/Game.hpp Figure/Ball/Ball.cpp Figure/Ball/Ball.hpp)
+        Figure/Rectnagle/Rectangle.hpp PublicVarible/PublicVar.cpp PublicVarible/PublicVar.hpp Game/Game.cpp Game/Game.hpp Figure/Ball/Ball.cpp Figure/Ball/Ball.hpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/SFML/SFML-2.5.1/lib/cmake/SFML)
