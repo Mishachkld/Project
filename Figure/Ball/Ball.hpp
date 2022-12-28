@@ -12,8 +12,13 @@ namespace gm {
     public:
         Ball(float positionX, float positionY);
         ~Ball();
+        sf::CircleShape getBall();
+        float getPositionX();
+        float getPositionY();
     private:
         float radiusOfBall = 8.f;
+        float xPosition = 400.f;
+        float yPosition = 400.f;
         sf::Color colour = sf::Color::Red;
         sf::CircleShape* ball;
     };

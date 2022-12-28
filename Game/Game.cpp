@@ -18,7 +18,7 @@ namespace gm {
         gm::Rectangle player1(xPositionOfRectangle1, yPositionOfRectangle1, 1);
         gm::Rectangle player2(xPositionOfRectangle2, yPositionOfRectangle2, 2);
 //        player2.setOrigin(xSizeOfRectangle, 0);
-        gm::Ball ball();
+        gm::Ball ball;
         ball.setOrigin(radiusOfBall, radiusOfBall);
 
 
