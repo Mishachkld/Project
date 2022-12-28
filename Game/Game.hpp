@@ -1,3 +1,5 @@
+#include <thread>
+#include <chrono>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -12,17 +14,13 @@ namespace gm {
             float y;
         };
     public:
-
         Game(unsigned int count);
         unsigned int getCount();
-        void changePosition(float x, float y);
-        sf::CircleShape generateBall();
         ~Game();
 
 
     private:
-        ///*Window*///
-
+        ///*Other*///
 
         ///*Shapes move*///
         float xPositionOfRectangle1 = 24.f;
@@ -35,8 +33,6 @@ namespace gm {
         ///*Size of shapes*///
         float xSizeOfRectangle = 16.f;
         float ySizeOfRectangle = 100.f;
-        float radiusOfBall = 8.f;
-
         ///*Settings*///
         const unsigned int x_size = 800;
         const unsigned int y_size = 400;
@@ -47,9 +43,7 @@ namespace gm {
         unsigned int win_count;
 
         ///*Functions*///
-        void getSettings();
         void startGame();
-        void update();
         void render();
     };
 

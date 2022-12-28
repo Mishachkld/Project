@@ -8,24 +8,37 @@ namespace gm {
     Ball::Ball(float positionX, float positionY) {
         xPosition = positionX;
         yPosition = positionY;
-        ball = new sf::CircleShape();
-        ball->setRadius(radiusOfBall);
+        ball = new sf::CircleShape(radiusOfBall);
         ball-> setFillColor(colour);
+        ball-> setOrigin(radiusOfBall, radiusOfBall);
     }
 
     Ball::~Ball() {
 
     }
 
-    sf::CircleShape Ball::getBall() {
-        return sf::CircleShape();
+    sf::CircleShape* Ball::getBall() {
+        return ball;
+    }
+
+
+    void Ball::setPosition(float x, float y) {
+        ball->setPosition(x, y);
+    }
+
+    void Ball::moveBall(float x, float y, float speed) {
+        xPosition = x;
+        yPosition = y;
+        setPosition(yPosition,xPosition);
     }
 
     float Ball::getPositionX() {
-        return 0;
+        return xPosition;
     }
 
     float Ball::getPositionY() {
-        return 0;
+        return yPosition;
     }
+
+
 } // gm
