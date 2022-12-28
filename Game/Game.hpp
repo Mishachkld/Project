@@ -1,14 +1,21 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "../Figure/Ball/Ball.hpp"
+#include "../Figure/Rectnagle/Rectangle.hpp"
+
 #pragma once
 namespace gm {
     class Game {
+        struct XY{
+            float x;
+            float y;
+        };
     public:
+
         Game(unsigned int count);
         unsigned int getCount();
         void changePosition(float x, float y);
-        sf::RectangleShape generateRectangle();
         sf::CircleShape generateBall();
         ~Game();
 
