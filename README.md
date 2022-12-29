@@ -1,8 +1,8 @@
 # Project for BFU
 **Игра Pong**
 - **Требования:**
-1. standart C++ 17+
-2. Cmake version 3.15+
+1. standart C++ 17
+2. Cmake version 3.15 и выше
 3. Клавиатура
  -  **Управление**
 1. Первый игрок(слева) **W - ввeрх**, **S - вниз**
