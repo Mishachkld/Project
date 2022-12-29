@@ -3,12 +3,14 @@
 namespace gm {
 
 
-    Rectangle::Rectangle(float xOfRectangle, float yOfRectangle, int ySizeOfWindow, int numberOfPlayer) {
-        xPosition = xOfRectangle;
-        yPosition = yOfRectangle;
-        numberPlayer = numberOfPlayer;
-        sizeOfWindow = ySizeOfWindow;
-        player = new sf::RectangleShape(sf::Vector2f(xSizeOfRectangle, ySizeOfRectangle));
+    Rectangle::Rectangle(float xOfRectangle, float yOfRectangle, int ySizeOfWindow, int numberOfPlayer,  sf::Vector2f sizeRectangle) {
+        _xPosition = xOfRectangle;
+        _yPosition = yOfRectangle;
+        _numberPlayer = numberOfPlayer;
+        _ySizeOfWindow = ySizeOfWindow;
+        _xSizeOfRectangle = sizeRectangle.x;
+        _ySizeOfRectangle = sizeRectangle.y;
+        player = new sf::RectangleShape(sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
         player->setFillColor(color);
     }
 
@@ -17,15 +19,15 @@ namespace gm {
     }
 
     void Rectangle::moveRectangle() {
-        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) and (numberPlayer == 1) ||
-            (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) and (numberPlayer == 2)) and (yPosition > 0)){
-            yPosition -= speed;
-            setPosition(xPosition, yPosition);
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) and (_numberPlayer == 1) ||
+            (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) and (_numberPlayer == 2)) and (_yPosition > 0)){
+            _yPosition -= _speed;
+            setPosition(_xPosition, _yPosition);
         }
-        if (((sf::Keyboard::isKeyPressed(sf::Keyboard::S) and (numberPlayer == 1) ||
-            (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and (numberPlayer == 2)))) and (sizeOfWindow > (yPosition + ySizeOfRectangle))){
-            yPosition += speed;
-            setPosition(xPosition, yPosition);
+        if (((sf::Keyboard::isKeyPressed(sf::Keyboard::S) and (_numberPlayer == 1) ||
+              (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and (_numberPlayer == 2)))) and (_ySizeOfWindow > (_yPosition + _ySizeOfRectangle))){
+            _yPosition += _speed;
+            setPosition(_xPosition, _yPosition);
         }
     }
 
@@ -34,18 +36,9 @@ namespace gm {
     }
 
     void Rectangle::setPosition(float &x, float &y) {
-        xPosition = x;
-        yPosition = y;
-        player->setPosition(xPosition, yPosition);
+        _xPosition = x;
+        _yPosition = y;
+        player->setPosition(_xPosition, _yPosition);
     }
-
-    float Rectangle::getPositionY() {
-        return yPosition;
-    }
-
-    float Rectangle::getPositionX() {
-        return xPosition;
-    }
-
 
 }

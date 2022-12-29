@@ -5,6 +5,8 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "../Rectnagle/Rectangle.hpp"
+#include <cmath>
+#include <iostream>
 
 
 #pragma once
@@ -13,7 +15,7 @@ namespace gm {
 
     class Ball {
     public:
-        Ball(float positionX, float positionY, unsigned int xWindow, unsigned int yWindow);
+        Ball(float positionX, float positionY, unsigned int xWindow, unsigned int yWindow, float radiusOfBall);
         ~Ball();
 
         ///*Functions*///
@@ -21,9 +23,10 @@ namespace gm {
         sf::CircleShape* getBall();
         void setPositionBall(float x, float y);
         void setSpeed(float speed);
-        float getSpeed();
-        float getPositionX();
-        float getPositionY();
+        void setSaveSpeed();
+        void getSaveSpeed(float speed);
+        void increaseSpeed(float l);
+
     private:
         ///*Radius of ball*///
         float _radiusOfBall = 8.f;
@@ -32,13 +35,15 @@ namespace gm {
         float _xPosition;
         float _yPosition;
         float _speed = 3.5f;
-        unsigned int window_x;
-        unsigned int window_y;
+        unsigned int x_window_x;
+        unsigned int y_window_y;
         sf::Vector2f moveSpeed = {_speed, _speed};
+        sf::Vector2f savedSpeed = {_speed, _speed};
 
         ///*Other*///
         sf::CircleShape* ball;
-        sf::Color colour = sf::Color::Red;
+        sf::Color colourMainBall = sf::Color::Yellow;
+        sf::Color colourAccentBall = sf::Color::Red;
 
         ///*Functions*///
         bool checkForGoal();

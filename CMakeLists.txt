@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.15)
 project(Project)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -16,6 +16,6 @@ add_executable(Project main.cpp
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/SFML/SFML-2.5.1/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
-file(COPY Counter/arial.ttf DESTINATION "/")
+file(COPY Counter/Fonts/arial.ttf DESTINATION "/")
 include_directories(D:/SFML/SFML-2.5.1/include)
 target_link_libraries(Project sfml-system sfml-window sfml-graphics sfml-audio)

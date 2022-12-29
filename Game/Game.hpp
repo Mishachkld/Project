@@ -25,31 +25,31 @@ namespace gm {
         gm::Counter* winPlayer;
 
         ///*Shapes move*///
-        float xPositionOfRectangle1 = 24.f;
-        float yPositionOfRectangle1 = 0.f;
-        float xPositionOfRectangle2 = 776.f;
-        float yPositionOfRectangle2 = 0.f;
-        float xPositionOfBall = 400.f;
-        float yPositionOfBall = 200.f;
+        float _xPositionOfRectangle1 = 24.f;
+        float _yPositionOfRectangle1 = 0.f;
+        float _xPositionOfRectangle2 = 776.f;
+        float _yPositionOfRectangle2 = 0.f;
+        float _xPositionOfBall = 400.f;
+        float _yPositionOfBall = 200.f;
 
         ///*Size of shapes*///
-        float xSizeOfRectangle = 16.f;
-        float ySizeOfRectangle = 100.f;
+        float _xSizeOfRectangle = 16.f;
+        float _ySizeOfRectangle = 100.f;
         float _sizeOfCounter = 48.f;
+        float _radiusOfBall = 8.f;
+
         ///*Settings*///
-        unsigned int x_size;
-        unsigned int y_size;
+        unsigned int x_size_x = 800.f;
+        unsigned int y_size_y = 400.f;
         std::string _title;
 
         ///*Counter*///
-        int countFirstPlayer = 0;
-        int countSecondPlayer = 0;
+        int scoreFirstPlayer = 0;
+        int scoreSecondPlayer = 0;
         int numberOfWinPlayer = 0;
-        unsigned int win_count;
+        unsigned int _winCount;
 
         ///*Functions*///
-        void settings();
-        unsigned int getCount();
         void endActivity(sf::Event &event, sf::RenderWindow &window);
 
     };

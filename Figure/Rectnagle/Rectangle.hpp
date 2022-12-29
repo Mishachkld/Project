@@ -4,27 +4,26 @@
 namespace gm {
     class Rectangle {
     public:
-            Rectangle(float xOfRectangle, float yOfRectangle, int ySizeOfWindow, int numberOfPlayer);
+            Rectangle(float xOfRectangle, float yOfRectangle, int ySizeOfWindow, int numberOfPlayer, sf::Vector2f sizeRectangle);
             ~Rectangle();
             ///*Functions*///
             void moveRectangle();
             void setPosition(float &x, float &y);
             sf::RectangleShape* getRectangle();
-            float getPositionY();
-            float getPositionX();
+
     private:
         ///*Size of rectangle*///
-        float xSizeOfRectangle = 16.f;
-        float ySizeOfRectangle = 100.f;
+        float _xSizeOfRectangle = 16.f;
+        float _ySizeOfRectangle = 100.f;
 
         ///*Position of rectangle*///
-        float xPosition;
-        float yPosition;
-        int sizeOfWindow;
-        int numberPlayer;
+        float _xPosition;
+        float _yPosition;
+        int _ySizeOfWindow;
+        int _numberPlayer;
 
         ///*Other*///
-        float speed = 3.5;
+        float _speed = 3.5;
         sf::RectangleShape* player;
         sf::Color color = sf::Color::White;
 

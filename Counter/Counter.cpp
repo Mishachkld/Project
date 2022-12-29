@@ -10,9 +10,9 @@ namespace gm {
 
     Counter::Counter(int count, float sizeX, float sizeY) {
         _count = count;
-        _xSzie = sizeX;
-        _ySzie = sizeY;
-        counter = new sf::RectangleShape(sf::Vector2f(_xSzie, _ySzie));
+        _xSize = sizeX;
+        _ySize = sizeY;
+        counter = new sf::RectangleShape(sf::Vector2f(_xSize, _ySize));
         counter->setFillColor(color);
 //        font.loadFromFile("arial.ttf");
 //        text = new sf::Text(std::to_string(count),font ,48);

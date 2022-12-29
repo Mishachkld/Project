@@ -17,15 +17,14 @@ namespace gm {
         sf::Text* getElementText();
 
     private:
-
        ///*Position*///
        float _xPosition = 0.f;
        float _yPosition = 0.f;
 
         ///*Custom*///
         sf::Color color = sf::Color::Yellow;
-        float _xSzie = 48;
-        float _ySzie = 48;
+        float _xSize = 48;
+        float _ySize = 48;
 
         ///*Other*///
         int _count = 0;

@@ -2,18 +2,18 @@
 // Created by Mishach on 28.12.2022.
 //
 
-#include <iostream>
-#include <cmath>
 #include "Ball.hpp"
 
 namespace gm {
-    Ball::Ball(float positionX, float positionY, unsigned int xWindow, unsigned int yWindow) {
+    Ball::Ball(float positionX, float positionY, unsigned int xWindow, unsigned int yWindow, float radiusOfBall) {
         _xPosition = positionX;
         _yPosition = positionY;
-        window_x = xWindow;
-        window_y = yWindow;
+        x_window_x = xWindow;
+        y_window_y = yWindow;
+        _radiusOfBall = radiusOfBall;
         ball = new sf::CircleShape(_radiusOfBall);
-        ball->setFillColor(colour);
+        ball->setFillColor(colourMainBall);
+        ball->setOutlineColor(colourAccentBall);
         ball->setOrigin(_radiusOfBall, _radiusOfBall);
         ball->setPosition(_xPosition, _yPosition);
     }
@@ -39,9 +39,9 @@ namespace gm {
                 secondPlayer.getRectangle()->getGlobalBounds());
         bool isCollisionFirstPlayer = ball->getGlobalBounds().intersects(
                 firstPlayer.getRectangle()->getGlobalBounds());
-        if ((_yPosition + _radiusOfBall >= window_y) || (_yPosition - _radiusOfBall <= 0))
+        if ((_yPosition + _radiusOfBall >= y_window_y) || (_yPosition - _radiusOfBall <= 0))
             moveSpeed.y = -moveSpeed.y;
-        if (((_xPosition + _radiusOfBall >= window_x) || (_xPosition - _radiusOfBall <= 0) ||
+        if (((_xPosition + _radiusOfBall >= x_window_x) || (_xPosition - _radiusOfBall <= 0) ||
              (isCollisionSecondPlayer) ||
              (isCollisionFirstPlayer)) && (!checkForGoal())) {
             if ((isCollisionFirstPlayer)) {
@@ -62,22 +62,15 @@ namespace gm {
         if (!checkForGoal()) {
             _xPosition += moveSpeed.x;
             _yPosition += moveSpeed.y;
+
             ball->setPosition(_xPosition, _yPosition);
         }
 
     }
 
-    float Ball::getPositionX() {
-        return _xPosition;
-    }
-
-    float Ball::getPositionY() {
-        return _yPosition;
-    }
-
     bool Ball::checkForGoal() {
         bool result = false;
-        if ((ball->getPosition().x >= window_x - 16.f) || (ball->getPosition().x <= 16.f))
+        if ((ball->getPosition().x + _radiusOfBall >= x_window_x) || (ball->getPosition().x - _radiusOfBall<= 0))
             result = true;
         return result;
     }
@@ -94,8 +87,19 @@ namespace gm {
 
     }
 
-    float Ball::getSpeed() {
-        return _speed;
+    void Ball::setSaveSpeed() {
+        savedSpeed = moveSpeed;
+    }
+
+    void Ball::getSaveSpeed(float speed) {
+        _speed = 3.5;
+        moveSpeed = savedSpeed;
+    }
+
+    void Ball::increaseSpeed(float k) {
+        _speed *= k;
+        moveSpeed.x * k;
+        moveSpeed.y * k;
     }
 
 
