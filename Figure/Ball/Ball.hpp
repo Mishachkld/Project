@@ -16,10 +16,11 @@ namespace gm {
         Ball(float positionX, float positionY, unsigned int xWindow, unsigned int yWindow);
         ~Ball();
 
-        ///*Function*///
-        void setPosition(float &x, float &y);
+        ///*Functions*///
         void moveBall(gm::Rectangle &firstPlayer, gm::Rectangle &secondPlayer);
         sf::CircleShape* getBall();
+
+        void setPositionBall(float x, float y);
         float getPositionX();
         float getPositionY();
     private:
@@ -29,7 +30,7 @@ namespace gm {
         ///*Position of ball*///
         float _xPosition;
         float _yPosition;
-        float _speed = 1;
+        float _speed = 2;
         unsigned int window_x;
         unsigned int window_y;
         sf::Vector2f moveSpeed = {_speed, _speed};
@@ -37,6 +38,11 @@ namespace gm {
         ///*Other*///
         sf::CircleShape* ball;
         sf::Color colour = sf::Color::Red;
+
+        ///*Functions*///
+        bool checkForGoal();
+        float generateRandomAngle();   // должна возвращать угол
+
     };
 
 } // gm
