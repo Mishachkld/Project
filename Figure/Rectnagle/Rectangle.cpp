@@ -2,7 +2,6 @@
 
 namespace gm {
 
-
     Rectangle::Rectangle(float xOfRectangle, float yOfRectangle, int ySizeOfWindow, int numberOfPlayer,  sf::Vector2f sizeRectangle) {
         _xPosition = xOfRectangle;
         _yPosition = yOfRectangle;

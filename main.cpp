@@ -1,5 +1,5 @@
 #include "Game/Game.hpp"
-#define WIN_COUNT 3
+#define WIN_COUNT 5
 #define SIZE_X 800
 #define SIZE_Y 400
 

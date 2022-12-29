@@ -35,13 +35,23 @@ namespace gm {
         player2->setPosition(_xPositionOfRectangle2, countSize);
         player2->getRectangle()->setOrigin(_xSizeOfRectangle, 0);
 
+        sf::Clock timer;
         while (window.isOpen()) {
             sf::Event event;
+            sf::Time timerToIncrease;
+            timerToIncrease = timer.getElapsedTime();
             bool isEnd = checkForEnd();
             if (!isEnd) {
                 player1->moveRectangle();
                 player2->moveRectangle();
                 ball->moveBall(player1, player2);
+                timerToIncrease = timer.getElapsedTime();
+
+                if (timerToIncrease.asSeconds()>=16) {
+                    ball->increaseSpeed(1.2f);
+                    timerToIncrease = timer.restart();
+                }
+
                 if (checkForGoal(ball->getBall()->getPosition().x)) {
                     if (checkForGoalFirstPlayer(ball->getBall()->getPosition().x))
                         _countersFirstPlayer.push_back(generateCounter(44 * scoreFirstPlayer, 1));
@@ -50,15 +60,12 @@ namespace gm {
                     ball->setSaveSpeed();
                     ball->setPositionBall(_xPositionOfBall, _yPositionOfBall);
                     ball->setSpeed(0);
-
-
                 }
                 while (window.pollEvent(event)) {
                     if (event.type == sf::Event::Closed)
                         window.close();
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
                         ball->getSaveSpeed(3.5f);
-
                 }
                 window.clear();
                 for (int i = 0; i < _countersFirstPlayer.size(); i++)
@@ -70,11 +77,11 @@ namespace gm {
                 window.draw(*ball->getBall());
                 window.display();
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
-            } else {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            } else{
                     endActivity(event, window);
             }
         }
+
     }
 
 
@@ -103,8 +110,13 @@ namespace gm {
         return result;
     }
 
-    void Game::endActivity(sf::Event &event, sf::RenderWindow &window) {
-        window.clear();    ///не хочет шрифты подргружать:(
+    void Game::endActivity(sf::Event &event,
+                           sf::RenderWindow &window) {  ///не хочет шрифты подргружать: поэтому счета не будет(
+        window.clear();
+        for (int i = 0; i < _countersFirstPlayer.size(); i++)
+            window.draw(_countersFirstPlayer[i]);
+        for (int i = 0; i < _countersSecondPlayer.size(); i++)
+            window.draw(_countersSecondPlayer[i]);
         winPlayer = new gm::Counter(numberOfWinPlayer, _sizeOfCounter, _sizeOfCounter);
         if (numberOfWinPlayer == 1)
             winPlayer->setPositionOfCounter(x_size_x / 4 - _sizeOfCounter, y_size_y / 2 - _sizeOfCounter);
@@ -118,7 +130,6 @@ namespace gm {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
                 window.close();
             }
-
         }
     }
 
@@ -127,12 +138,11 @@ namespace gm {
 
         if (player == 1)
             rectangle.setPosition(x, 16);
-        else{
+        else {
             rectangle.setOrigin(12, 0);
             rectangle.setPosition(x_size_x - x, 16);
         }
         return rectangle;
-
     }
 
     bool Game::checkForGoalFirstPlayer(float x) {
