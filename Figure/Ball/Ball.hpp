@@ -19,7 +19,7 @@ namespace gm {
         ~Ball();
 
         ///*Functions*///
-        void moveBall(gm::Rectangle &firstPlayer, gm::Rectangle &secondPlayer);
+        void moveBall(gm::Rectangle *firstPlayer, gm::Rectangle *secondPlayer);
         sf::CircleShape* getBall();
         void setPositionBall(float x, float y);
         void setSpeed(float speed);

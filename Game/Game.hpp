@@ -15,14 +15,21 @@ namespace gm {
     public:
         Game(unsigned int count, unsigned int sizeWinX, unsigned int sizeWinY, std::string title);
         ~Game();
+
+        ///*Functions*///
         void startGame();
         bool checkForGoal(float ballPositionX);
+        bool checkForGoalFirstPlayer(float x);
         bool checkForEnd();
+        void generateCounter(float x,  int player);
 
 
     private:
         ///*Other*///
         gm::Counter* winPlayer;
+        gm::Rectangle* player1;
+        gm::Rectangle* player2;
+        gm::Ball* ball;
 
         ///*Shapes move*///
         float _xPositionOfRectangle1 = 24.f;

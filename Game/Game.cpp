@@ -11,6 +11,13 @@ namespace gm {
         _title = title;
     }
 
+    Game::~Game() {
+        delete winPlayer;
+        delete player1;
+        delete player2;
+        delete ball;
+    }
+
     void Game::startGame() {
         ///*Костыли*///
         float countSize = y_size_y / 2 - _ySizeOfRectangle / 2;
@@ -19,36 +26,44 @@ namespace gm {
         _xPositionOfRectangle2 = x_size_x - _xPositionOfRectangle1;
 
         sf::RenderWindow window(sf::VideoMode(x_size_x, y_size_y), _title);
-        gm::Rectangle player1(_xPositionOfRectangle1, _yPositionOfRectangle1, y_size_y, 1,
-                              sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
-        gm::Rectangle player2(_xPositionOfRectangle2, _yPositionOfRectangle2, y_size_y, 2, sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
-        gm::Ball ball(_xPositionOfBall, _yPositionOfBall, x_size_x, y_size_y, _radiusOfBall);
-        player1.setPosition(_xPositionOfRectangle1, countSize);
-        player2.setPosition(_xPositionOfRectangle2, countSize);
-        player2.getRectangle()->setOrigin(_xSizeOfRectangle, 0);
+        player1 = new gm::Rectangle(_xPositionOfRectangle1, _yPositionOfRectangle1, y_size_y, 1,
+                                    sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
+        player2 = new gm::Rectangle(_xPositionOfRectangle2, _yPositionOfRectangle2, y_size_y, 2,
+                                    sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
+        ball = new gm::Ball(_xPositionOfBall, _yPositionOfBall, x_size_x, y_size_y, _radiusOfBall);
+        player1->setPosition(_xPositionOfRectangle1, countSize);
+        player2->setPosition(_xPositionOfRectangle2, countSize);
+        player2->getRectangle()->setOrigin(_xSizeOfRectangle, 0);
+
         while (window.isOpen()) {
             sf::Event event;
             bool isEnd = checkForEnd();
             if (!isEnd) {
-                player1.moveRectangle();
-                player2.moveRectangle();
-                ball.moveBall(player1, player2);
-                if (checkForGoal(ball.getBall()->getPosition().x)) {
-                    ball.setSaveSpeed();
-                    ball.setPositionBall(_xPositionOfBall, _yPositionOfBall);
-                    ball.setSpeed(0);
+                player1->moveRectangle();
+                player2->moveRectangle();
+                ball->moveBall(player1, player2);
+                if (checkForGoal(ball->getBall()->getPosition().x)) {
+                    if (checkForGoalFirstPlayer(ball->getBall()->getPosition().x))
+                        generateCounter(40 * scoreFirstPlayer, 1);
+                    else
+                        generateCounter(40 * scoreSecondPlayer, 2);
+                    ball->setSaveSpeed();
+                    ball->setPositionBall(_xPositionOfBall, _yPositionOfBall);
+                    ball->setSpeed(0);
+
+
                 }
                 while (window.pollEvent(event)) {
                     if (event.type == sf::Event::Closed)
                         window.close();
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-                        ball.getSaveSpeed(3.5f);
+                        ball->getSaveSpeed(3.5f);
 
                 }
                 window.clear();
-                window.draw(*player1.getRectangle());
-                window.draw(*player2.getRectangle());
-                window.draw(*ball.getBall());
+                window.draw(*player1->getRectangle());
+                window.draw(*player2->getRectangle());
+                window.draw(*ball->getBall());
                 window.display();
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             } else {
@@ -57,9 +72,6 @@ namespace gm {
         }
     }
 
-    Game::~Game() {
-        delete winPlayer;
-    }
 
     bool Game::checkForGoal(float ballPostionX) {
         bool result = false;
@@ -87,7 +99,7 @@ namespace gm {
     }
 
     void Game::endActivity(sf::Event &event, sf::RenderWindow &window) {
-        window.clear();
+        window.clear();    ///не хочет шрифты подргружать:(
 /*        sf::Font font;
         sf::Text Count;
         font.loadFromFile("arial.ttf");
@@ -113,4 +125,18 @@ namespace gm {
 
         }
     }
+
+    void Game::generateCounter(float x, int player) {   /// 20 * 18
+        gm::Counter counter(player, x, 16);
+
+
+    }
+
+    bool Game::checkForGoalFirstPlayer(float x) {
+        if (x >= x_size_x - _xSizeOfRectangle)
+            return true;
+        return false;
+    }
+
+
 } // gm

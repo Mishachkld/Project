@@ -33,12 +33,12 @@ namespace gm {
         return coords;
     }
 
-    void Ball::moveBall(gm::Rectangle &firstPlayer, gm::Rectangle &secondPlayer) {
+    void Ball::moveBall(gm::Rectangle *firstPlayer, gm::Rectangle *secondPlayer) {
         sf::Vector2f angleVector;
         bool isCollisionSecondPlayer = ball->getGlobalBounds().intersects(
-                secondPlayer.getRectangle()->getGlobalBounds());
+                secondPlayer->getRectangle()->getGlobalBounds());
         bool isCollisionFirstPlayer = ball->getGlobalBounds().intersects(
-                firstPlayer.getRectangle()->getGlobalBounds());
+                firstPlayer->getRectangle()->getGlobalBounds());
         if ((_yPosition + _radiusOfBall >= y_window_y) || (_yPosition - _radiusOfBall <= 0))
             moveSpeed.y = -moveSpeed.y;
         if (((_xPosition + _radiusOfBall >= x_window_x) || (_xPosition - _radiusOfBall <= 0) ||
