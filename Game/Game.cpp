@@ -44,9 +44,9 @@ namespace gm {
                 ball->moveBall(player1, player2);
                 if (checkForGoal(ball->getBall()->getPosition().x)) {
                     if (checkForGoalFirstPlayer(ball->getBall()->getPosition().x))
-                        generateCounter(40 * scoreFirstPlayer, 1);
+                        _countersFirstPlayer.push_back(generateCounter(44 * scoreFirstPlayer, 1));
                     else
-                        generateCounter(40 * scoreSecondPlayer, 2);
+                        _countersSecondPlayer.push_back(generateCounter(44 * scoreSecondPlayer, 2));
                     ball->setSaveSpeed();
                     ball->setPositionBall(_xPositionOfBall, _yPositionOfBall);
                     ball->setSpeed(0);
@@ -61,13 +61,18 @@ namespace gm {
 
                 }
                 window.clear();
+                for (int i = 0; i < _countersFirstPlayer.size(); i++)
+                    window.draw(_countersFirstPlayer[i]);
+                for (int i = 0; i < _countersSecondPlayer.size(); i++)
+                    window.draw(_countersSecondPlayer[i]);
                 window.draw(*player1->getRectangle());
                 window.draw(*player2->getRectangle());
                 window.draw(*ball->getBall());
                 window.display();
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             } else {
-                endActivity(event, window);
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                    endActivity(event, window);
             }
         }
     }
@@ -100,15 +105,6 @@ namespace gm {
 
     void Game::endActivity(sf::Event &event, sf::RenderWindow &window) {
         window.clear();    ///не хочет шрифты подргружать:(
-/*        sf::Font font;
-        sf::Text Count;
-        font.loadFromFile("arial.ttf");
-        Count.setFont(font);
-        Count.setString(std::to_string(42));
-        Count.setColor(sf::Color::White);
-        Count.setStyle(sf::Text::Bold);
-        Count.setCharacterSize(50);
-        Count.setPosition(500, 500);*/
         winPlayer = new gm::Counter(numberOfWinPlayer, _sizeOfCounter, _sizeOfCounter);
         if (numberOfWinPlayer == 1)
             winPlayer->setPositionOfCounter(x_size_x / 4 - _sizeOfCounter, y_size_y / 2 - _sizeOfCounter);
@@ -126,9 +122,16 @@ namespace gm {
         }
     }
 
-    void Game::generateCounter(float x, int player) {   /// 20 * 18
-        gm::Counter counter(player, x, 16);
+    sf::RectangleShape Game::generateCounter(float x, int player) {   /// 20 * 18
+        sf::RectangleShape rectangle(sf::Vector2f(12, 12));
 
+        if (player == 1)
+            rectangle.setPosition(x, 16);
+        else{
+            rectangle.setOrigin(12, 0);
+            rectangle.setPosition(x_size_x - x, 16);
+        }
+        return rectangle;
 
     }
 

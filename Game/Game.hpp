@@ -21,7 +21,7 @@ namespace gm {
         bool checkForGoal(float ballPositionX);
         bool checkForGoalFirstPlayer(float x);
         bool checkForEnd();
-        void generateCounter(float x,  int player);
+        sf::RectangleShape generateCounter(float x,  int player);
 
 
     private:
@@ -38,6 +38,8 @@ namespace gm {
         float _yPositionOfRectangle2 = 0.f;
         float _xPositionOfBall = 400.f;
         float _yPositionOfBall = 200.f;
+        std::vector<sf::RectangleShape> _countersFirstPlayer;
+        std::vector<sf::RectangleShape> _countersSecondPlayer;
 
         ///*Size of shapes*///
         float _xSizeOfRectangle = 16.f;

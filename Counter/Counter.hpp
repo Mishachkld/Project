@@ -22,7 +22,8 @@ namespace gm {
        float _yPosition = 0.f;
 
         ///*Custom*///
-        sf::Color color = sf::Color::Yellow;
+        sf::Color color = sf::Color::Magenta;
+        sf::Color textColor = sf::Color::Black;
         float _xSize = 48;
         float _ySize = 48;
 
@@ -30,7 +31,6 @@ namespace gm {
         int _count = 0;
         sf::RectangleShape* counter;
         sf::Text* text;
-        sf::Color textColor = sf::Color::Black;
         sf::Font font;
         std::string FILE_PATH = "arial.ttf";
 
