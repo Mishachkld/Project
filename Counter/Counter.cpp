@@ -14,9 +14,14 @@ namespace gm {
         _ySzie = sizeY;
         counter = new sf::RectangleShape(sf::Vector2f(_xSzie, _ySzie));
         counter->setFillColor(color);
-        text = new sf::Text(std::to_string(count), font);
+//        font.loadFromFile(FILE_PATH);
+        text = new sf::Text(std::to_string(count),font ,48);
         text->setString(std::to_string(count));
-        text->setCharacterSize(24);
+        text->setFillColor(textColor);
+
+
+
+
 
     }
 
@@ -32,6 +37,19 @@ namespace gm {
 
     Counter::~Counter() {
         delete counter;
+    }
+
+    void Counter::loadFont() {
+
+        if (!font.loadFromFile(FILE_PATH))
+        {
+            std::cout << "Errrorrrrrrrrrrrrrrrr...";
+
+        }
+    }
+
+    sf::Text* Counter::getElementText() {
+        return text;
     }
 
 } // gm

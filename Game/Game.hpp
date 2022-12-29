@@ -8,6 +8,7 @@
 #include "../Figure/Rectnagle/Rectangle.hpp"
 
 
+
 #pragma once
 namespace gm {
     class Game {

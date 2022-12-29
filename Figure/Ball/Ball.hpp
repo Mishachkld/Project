@@ -30,7 +30,7 @@ namespace gm {
         ///*Position of ball*///
         float _xPosition;
         float _yPosition;
-        float _speed = 2;
+        float _speed = 3.5f;
         unsigned int window_x;
         unsigned int window_y;
         sf::Vector2f moveSpeed = {_speed, _speed};

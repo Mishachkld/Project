@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <iostream>
 
 namespace gm {
 
@@ -10,8 +11,10 @@ namespace gm {
     public:
         Counter(int count, float sizeX, float sizeY);
         ~Counter();
+        ///*Functions*///
         sf::RectangleShape* getCounter();
         void setPositionOfCounter(float x, float y);
+        sf::Text* getElementText();
 
     private:
 
@@ -28,7 +31,13 @@ namespace gm {
         int _count = 0;
         sf::RectangleShape* counter;
         sf::Text* text;
-        sf::Font font = sf::Font();
+        sf::Color textColor = sf::Color::Black;
+        sf::Font font;
+        std::string FILE_PATH = "arial.ttf";
+
+        ///*Functions*///
+        void loadFont();
+
 
     };
 

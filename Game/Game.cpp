@@ -86,10 +86,22 @@ namespace gm {
     }
 
     void Game::endActivity(sf::Event &event, sf::RenderWindow &window) {
+        int count1 = 0;
+        int count2 = 0;
+        sf::Font font;
+        font.loadFromFile("arial.ttf");
+        sf::Text Count;
+        Count.setFont(font);
+        Count.setString(std::to_string(42));
+        Count.setCharacterSize(50);
+        Count.setPosition(500, 500);
+        Count.setStyle(sf::Text::Bold);
+        Count.setColor(sf::Color::White);
         window.clear();
         winPlayer = new gm::Counter(numberOfWinPlayer,_sizeOfCounter, _sizeOfCounter);
         winPlayer->setPositionOfCounter(400,200);
-        window.draw(*winPlayer->getCounter());
+        winPlayer->getElementText()->setPosition(400,200);
+        window.draw(Count);
         window.display();
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
