@@ -23,7 +23,7 @@ namespace gm {
        float _yPosition = 0.f;
 
         ///*Custom*///
-        sf::Color color = sf::Color::White;
+        sf::Color color = sf::Color::Yellow;
         float _xSzie = 48;
         float _ySzie = 48;
 

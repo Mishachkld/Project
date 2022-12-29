@@ -14,10 +14,10 @@ namespace gm {
         _ySzie = sizeY;
         counter = new sf::RectangleShape(sf::Vector2f(_xSzie, _ySzie));
         counter->setFillColor(color);
-//        font.loadFromFile(FILE_PATH);
-        text = new sf::Text(std::to_string(count),font ,48);
-        text->setString(std::to_string(count));
-        text->setFillColor(textColor);
+//        font.loadFromFile("arial.ttf");
+//        text = new sf::Text(std::to_string(count),font ,48);
+//        text->setString(std::to_string(count));
+//        text->setFillColor(textColor);
 
 
 

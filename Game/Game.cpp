@@ -30,12 +30,14 @@ namespace gm {
                 ball.moveBall(player1, player2);
                 if (checkForGoal(ball.getBall()->getPosition().x)) {
                     ball.setPositionBall(xPositionOfBall, yPositionOfBall);
-                    ball.moveBall(player1, player2);
+                    ball.setSpeed(0);
                 }
                 while (window.pollEvent(event)) {
                     if (event.type == sf::Event::Closed)
                         window.close();
-//                if (event.type == sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                        ball.setSpeed(3.5f);
+
                 }
                 window.clear();
                 window.draw(*player1.getRectangle());
@@ -47,6 +49,7 @@ namespace gm {
                 endActivity(event, window);
             }
         }
+
 
 
     }
@@ -80,32 +83,42 @@ namespace gm {
 
     bool Game::checkForEnd() {
         bool result = false;
-        if ((countFirstPlayer >= win_count) || (countSecondPlayer >= win_count))
+        if ((countFirstPlayer >= win_count)){
+            numberOfWinPlayer = 1;
             result = true;
+        } else if((countSecondPlayer >= win_count)){
+            numberOfWinPlayer = 2;
+            result = true;
+        }
         return result;
     }
 
     void Game::endActivity(sf::Event &event, sf::RenderWindow &window) {
-        int count1 = 0;
-        int count2 = 0;
-        sf::Font font;
-        font.loadFromFile("arial.ttf");
+        window.clear();
+/*        sf::Font font;
         sf::Text Count;
+        font.loadFromFile("arial.ttf");
         Count.setFont(font);
         Count.setString(std::to_string(42));
-        Count.setCharacterSize(50);
-        Count.setPosition(500, 500);
-        Count.setStyle(sf::Text::Bold);
         Count.setColor(sf::Color::White);
-        window.clear();
-        winPlayer = new gm::Counter(numberOfWinPlayer,_sizeOfCounter, _sizeOfCounter);
-        winPlayer->setPositionOfCounter(400,200);
-        winPlayer->getElementText()->setPosition(400,200);
-        window.draw(Count);
+        Count.setStyle(sf::Text::Bold);
+        Count.setCharacterSize(50);
+        Count.setPosition(500, 500);*/
+        winPlayer = new gm::Counter(numberOfWinPlayer, _sizeOfCounter, _sizeOfCounter);
+        if (numberOfWinPlayer == 1)
+            winPlayer->setPositionOfCounter(x_size / 4 - _sizeOfCounter, y_size / 2 -_sizeOfCounter );
+        else
+            winPlayer->setPositionOfCounter(x_size * 3/4 - _sizeOfCounter, y_size / 2  - _sizeOfCounter);
+        window.draw(*winPlayer->getCounter());
         window.display();
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+                window.close();
+            }
+
         }
+
     }
 } // gm
