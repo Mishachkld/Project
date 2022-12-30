@@ -14,7 +14,7 @@ namespace gm {
         _ySize = sizeY;
         counter = new sf::RectangleShape(sf::Vector2f(_xSize, _ySize));
         counter->setFillColor(color);
-//        font.loadFromFile("arial.ttf");
+        font.loadFromFile("Counter\\Fonts\\arial.ttf");
 //        text = new sf::Text(std::to_string(count),font ,48);
 //        text->setString(std::to_string(count));
 //        text->setFillColor(textColor);
