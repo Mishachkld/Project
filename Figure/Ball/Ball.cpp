@@ -45,8 +45,8 @@ namespace gm {
              (isCollisionSecondPlayer) ||
              (isCollisionFirstPlayer)) && (!checkForGoal())) {
             if ((isCollisionFirstPlayer)) {
-                float angle1 = 300 + std::rand() % (360 - 299); //300 - 360// 30-150   //0 - 60
-                float angle2 = 0 + std::rand() % (60 - 0 + 1);
+                float angle1 = (300 + std::rand() % (360 - 299)); //300 - 360// 30-150   //0 - 60
+                float angle2 = (0 + std::rand() % (60 - 0 + 1));
                 if (rand() % 2)
                     angleVector = createVector(angle1);
                 else
@@ -91,7 +91,7 @@ namespace gm {
         savedSpeed = moveSpeed;
     }
 
-    void Ball::getSaveSpeed(float speed) {
+    void Ball::getSaveSpeed() {
         _speed = 3.5;
         moveSpeed = savedSpeed;
     }

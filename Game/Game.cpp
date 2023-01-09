@@ -20,12 +20,13 @@ namespace gm {
 
     void Game::startGame() {
         ///*Костыли*///
-        float countSize = y_size_y / 2 - _ySizeOfRectangle / 2;
+        countSize = y_size_y / 2 - _ySizeOfRectangle / 2;
         _xPositionOfBall = x_size_x / 2;
         _yPositionOfBall = y_size_y / 2;
         _xPositionOfRectangle2 = x_size_x - _xPositionOfRectangle1;
 
         sf::RenderWindow window(sf::VideoMode(x_size_x, y_size_y), _title);
+        window.setFramerateLimit(60);
         player1 = new gm::Rectangle(_xPositionOfRectangle1, _yPositionOfRectangle1, y_size_y, 1,
                                     sf::Vector2f(_xSizeOfRectangle, _ySizeOfRectangle));
         player2 = new gm::Rectangle(_xPositionOfRectangle2, _yPositionOfRectangle2, y_size_y, 2,
@@ -35,6 +36,7 @@ namespace gm {
         player2->setPosition(_xPositionOfRectangle2, countSize);
         player2->getRectangle()->setOrigin(_xSizeOfRectangle, 0);
 
+        font.loadFromFile("arial.ttf");
         sf::Clock timer;
         while (window.isOpen()) {
             sf::Event event;
@@ -47,7 +49,7 @@ namespace gm {
                 ball->moveBall(player1, player2);
                 timerToIncrease = timer.getElapsedTime();
 
-                if (timerToIncrease.asSeconds()>=16) {
+                if (timerToIncrease.asSeconds() >= 16) {
                     ball->increaseSpeed(1.2f);
                     timerToIncrease = timer.restart();
                 }
@@ -65,7 +67,8 @@ namespace gm {
                     if (event.type == sf::Event::Closed)
                         window.close();
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-                        ball->getSaveSpeed(3.5f);
+                        ball->getSaveSpeed();
+
                 }
                 window.clear();
                 for (int i = 0; i < _countersFirstPlayer.size(); i++)
@@ -76,9 +79,9 @@ namespace gm {
                 window.draw(*player2->getRectangle());
                 window.draw(*ball->getBall());
                 window.display();
-                std::this_thread::sleep_for(std::chrono::milliseconds(1));
-            } else{
-                    endActivity(event, window);
+//                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            } else {
+                endActivity(event, window);
             }
         }
 
@@ -117,7 +120,7 @@ namespace gm {
             window.draw(_countersFirstPlayer[i]);
         for (int i = 0; i < _countersSecondPlayer.size(); i++)
             window.draw(_countersSecondPlayer[i]);
-        winPlayer = new gm::Counter(numberOfWinPlayer, _sizeOfCounter, _sizeOfCounter);
+        winPlayer = new gm::Counter(numberOfWinPlayer, _sizeOfCounter, _sizeOfCounter, font);
         if (numberOfWinPlayer == 1)
             winPlayer->setPositionOfCounter(x_size_x / 4 - _sizeOfCounter, y_size_y / 2 - _sizeOfCounter);
         else
@@ -127,8 +130,8 @@ namespace gm {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                window.close();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+                restartGame();
             }
         }
     }
@@ -149,6 +152,16 @@ namespace gm {
         if (x >= x_size_x - _xSizeOfRectangle)
             return true;
         return false;
+    }
+
+    void Game::restartGame() {
+        scoreFirstPlayer = 0;
+        scoreSecondPlayer = 0;
+        _countersFirstPlayer.clear();
+        _countersSecondPlayer.clear();
+        player1->setPosition(_xPositionOfRectangle1,countSize);
+        player2->setPosition(_xPositionOfRectangle2,countSize);
+
     }
 
 

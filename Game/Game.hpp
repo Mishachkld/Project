@@ -30,6 +30,8 @@ namespace gm {
         gm::Rectangle* player1;
         gm::Rectangle* player2;
         gm::Ball* ball;
+        sf::Font font;
+
 
         ///*Shapes move*///
         float _xPositionOfRectangle1 = 24.f;
@@ -38,6 +40,7 @@ namespace gm {
         float _yPositionOfRectangle2 = 0.f;
         float _xPositionOfBall = 400.f;
         float _yPositionOfBall = 200.f;
+        float countSize = 200.f;
         std::vector<sf::RectangleShape> _countersFirstPlayer;
         std::vector<sf::RectangleShape> _countersSecondPlayer;
 
@@ -60,7 +63,7 @@ namespace gm {
 
         ///*Functions*///
         void endActivity(sf::Event &event, sf::RenderWindow &window);
-
+        void restartGame();
     };
 
 }

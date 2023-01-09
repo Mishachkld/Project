@@ -24,7 +24,7 @@ namespace gm {
         void setPositionBall(float x, float y);
         void setSpeed(float speed);
         void setSaveSpeed();
-        void getSaveSpeed(float speed);
+        void getSaveSpeed();
         void increaseSpeed(float l);
 
     private:
